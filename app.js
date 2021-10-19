@@ -2,10 +2,10 @@
 const express = require('express');
 const bodyParser  = require('body-parser');
 const mongoose = require('mongoose');
-const Thing = require('./models/thing');
+const Sauce = require('./models/sauce');
 
 // déf de l'appli express
-const app = express();
+const app = express(); 
 
 mongoose.connect('mongodb+srv://OCLP6:testmdp@clusterp6.82nvj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
   { useNewUrlParser: true,
@@ -23,14 +23,14 @@ app.use((req, res, next) => {
     next();
   });
 //  transforme données en json
-  app.use(bodyParser.json());
+  app.use(express.json());
 // requetes post
   app.post('/api/nom', (req, res, next)=> {
     delete req.body._id;
-    const thing = new Thing({
+    const sauce = new Sauce({
       ...req.body
     });
-    thing.save()
+    sauce.save()
       .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
       .catch(error => res.status(400).json({ error }));
 next();
@@ -38,15 +38,20 @@ next();
 
 // objets "sortants" ds api
 app.use('/api/nom',(req, res, next)=>{
-    const nomApi = [
-        {
-            objet:1
-        },
-        {
-            objet: 2
-        }
-    ]
-    next();
+  
+    Sauce.find()
+      .then(sauces => res.status(200).json(sauces))
+      .catch(error => res.status(400).json({ error }));
+  
+    // const nomApi = [
+    //     {
+    //         objet:1
+    //     },
+    //     {
+    //         objet: 2
+    //     }
+    // ]
+    // next();
 });
 // export de l'app pour qu'autre fichiers du projet puissent y accéder dt serveur node
 module.exports = app;
