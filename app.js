@@ -1,7 +1,7 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
-const Sauce = require('./models/sauce');
+const Sauce = require('./models/SauceModel');
 
 const app = express(); 
 
