@@ -21,24 +21,6 @@ app.use((req, res, next) => {
 //  transforme données en json
   app.use(express.json());
 // requetes post
-  app.post('/api/nom', (req, res, next)=> {
-    delete req.body._id;
-    const sauce = new Sauce({
-      ...req.body
-    });
-    sauce.save()
-      .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
-      .catch(error => res.status(400).json({ error }));
-next();
-  });
-
-// objets "sortants" ds api
-app.use('/api/nom',(req, res, next)=>{
   
-    Sauce.find()
-      .then(sauces => res.status(200).json(sauces))
-      .catch(error => res.status(400).json({ error })); 
-   
-});
 // export de l'app pour qu'autre fichiers du projet puissent y accéder dt serveur node
 module.exports = app;
