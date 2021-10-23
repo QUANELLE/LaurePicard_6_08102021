@@ -1,7 +1,8 @@
-
 const express = require('express');
 const mongoose = require('mongoose');
-const Sauce = require('./models/SauceModel');
+
+const sauceRoute = require('./routes/SauceRoute');
+const userRoute = require('./routes/UserRoute');
 
 const app = express(); 
 
@@ -20,7 +21,11 @@ app.use((req, res, next) => {
   });
 //  transforme données en json
   app.use(express.json());
-// requetes post
+
+  app.use('/api/auth', userRoute);
+
+  app.use('/api/sauces', sauceRoute);
+
   
 // export de l'app pour qu'autre fichiers du projet puissent y accéder dt serveur node
 module.exports = app;

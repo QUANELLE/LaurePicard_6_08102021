@@ -1,5 +1,3 @@
-// const router = require("../../app");
-
 const Sauce = require('../models/SauceModel');
 
 exports.createSauce= (req, res, next)=> {
@@ -38,7 +36,7 @@ exports.deleteSauce = (req, res, next)=>{
 };
 
 exports.getAllSauces = (req, res, next)=>{
-  
+  console.log('getAllSauces ok');
     Sauce.find()
       .then(sauces => res.status(200).json(sauces))
       .catch(error => res.status(400).json({ error })); 
