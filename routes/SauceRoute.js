@@ -12,3 +12,5 @@ router.get('/api/sauces',sauceCtrl.getAllSauces);
 router.delete('/api/sauces/:id',sauceCtrl.deleteSauce);
 router.put('/api/sauces/:id',sauceCtrl.modifySauce);
 router.get('/api/sauces/:id',sauceCtrl.getOneSauce);
+
+module.exports = router;
